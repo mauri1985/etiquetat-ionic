@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AltausuarioComponent } from '../components/altausuario/altausuario.component';
 
 @Component({
   selector: 'app-home',

@@ -9,11 +9,22 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+import { CookieService } from 'ngx-cookie-service';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
+//components
+import { LoginComponent } from './components/login/login.component';
+import { AltausuarioComponent } from './components/altausuario/altausuario.component';
+import { RedirectComponent } from './redirect/redirect.component';
+import { RouterModule } from '@angular/router';
+
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [RedirectComponent, AltausuarioComponent, AppComponent,LoginComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [RouterModule, FormsModule, ReactiveFormsModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers: [
+    CookieService,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
