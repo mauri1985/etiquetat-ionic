@@ -16,11 +16,10 @@ import { HttpClientModule } from '@angular/common/http';
 //components
 import { LoginComponent } from './components/login/login.component';
 import { AltausuarioComponent } from './components/altausuario/altausuario.component';
-import { RedirectComponent } from './redirect/redirect.component';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [RedirectComponent, AltausuarioComponent, AppComponent,LoginComponent],
+  declarations: [AltausuarioComponent, AppComponent,LoginComponent],
   entryComponents: [],
   imports: [RouterModule, FormsModule, ReactiveFormsModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers: [
