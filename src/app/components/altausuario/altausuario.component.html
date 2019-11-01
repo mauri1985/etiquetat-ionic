@@ -1,6 +1,7 @@
-<ion-content overflow-scroll="true">
-    <form #usuarioForm="ngForm" (ngSubmit)="registrarUsuario()" [formGroup]="registerForm">
-        <input type=image src=".\assets\img\registro.png" width="350" height="50">
+<ion-content overflow-scroll="true" >
+        <input type=image src=".\assets\img\registro.png" class="col-md-4 center">
+    <form #usuarioForm="ngForm" (ngSubmit)="registrarUsuario()" [formGroup]="registerForm" class="col center">
+        
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label for="inputNombre">Nombre</label>
