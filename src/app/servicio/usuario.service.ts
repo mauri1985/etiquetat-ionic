@@ -19,7 +19,7 @@ export class UsuarioService {
       })
     }
 
-    const url = 'http://localhost:8080/proyecto-web/rest/registroUsuario';
+    const url = 'http://192.168.1.43:8080/proyecto-web/rest/registroUsuario';
     console.log(usuario);
     
     
@@ -34,7 +34,7 @@ export class UsuarioService {
       })
     }
 
-    const url = 'http://localhost:8080/proyecto-web/rest/altaUsuario';
+    const url = 'http://192.168.1.43:8080/proyecto-web/rest/altaUsuario';
     console.log(usuario);
     
     
