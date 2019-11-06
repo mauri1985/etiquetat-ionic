@@ -14,7 +14,7 @@ import { Point, DragRef } from '@angular/cdk/drag-drop/typings/drag-ref';
 import { Item } from './item';
 import * as jspdf from 'jspdf';
 
-import { Imagen } from 'src/app/clases/Imagen';
+import { Imagen } from '../../clases/Imagen';
 import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -24,8 +24,8 @@ import { delay } from 'q';
 import { async } from '@angular/core/testing/testing';
 import { AltaParametroService } from './../../servicio/alta-parametro.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Usuario } from 'src/app/clases/Usuario';
-import { LoginService } from 'src/app/servicio/login.service';
+import { Usuario } from '../../clases/Usuario';
+import { LoginService } from '../../servicio/login.service';
 import { CookieService } from 'ngx-cookie-service';
 declare var takeSS: any;
 export interface DialogData {

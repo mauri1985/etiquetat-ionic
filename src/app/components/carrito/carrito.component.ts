@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Producto } from 'src/app/clases/Producto';
-import { Objeto } from 'src/app/clases/Objeto';
-import { Etiqueta } from 'src/app/clases/Etiqueta';
+import { Producto } from '../../clases/Producto';
+import { Objeto } from '../../clases/Objeto';
+import { Etiqueta } from '../../clases/Etiqueta';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 
-import { PagoService } from 'src/app/servicio/pago.service';
+import { PagoService } from '../../servicio/pago.service';
 
 @Component({
   selector: 'app-carrito',

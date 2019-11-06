@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoriaService } from 'src/app/servicio/categoria.service';
-import { Categoria } from 'src/app/clases/Categoria';
+import { CategoriaService } from '../../servicio/categoria.service';
+import { Categoria } from '../../clases/Categoria';
 import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({

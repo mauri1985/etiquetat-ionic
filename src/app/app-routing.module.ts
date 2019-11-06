@@ -17,7 +17,7 @@ const APP_ROUTES: Routes = [
   { path: 'plantilla', component: PlantillaComponent },
   { path: 'carrito', component: CarritoComponent },
   { path: 'registro', component: AltausuarioComponent },
-  { path: '', component:LoginComponent},
+  { path: '', component:LoginComponent },
   { path: 'home', component:HomeComponent},
   { path: 'altaAdmin', component:AltaUsuarioAdminComponent},
   { path: 'cambioContrasenia', component:CambioContraseniaComponent},

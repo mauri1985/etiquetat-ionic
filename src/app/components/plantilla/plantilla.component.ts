@@ -14,7 +14,7 @@ import { Point, DragRef } from '@angular/cdk/drag-drop/typings/drag-ref';
 import { Item } from './item';
 import * as jspdf from 'jspdf';
 
-import { Imagen } from 'src/app/clases/Imagen';
+import { Imagen } from '../../clases/Imagen';
 import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
