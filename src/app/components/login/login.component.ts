@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {Usuario} from '../../clases/Usuario';
-import { LoginService } from '../../servicio/login.service';
+import {Usuario} from 'src/app/clases/Usuario';
+import { LoginService } from 'src/app/servicio/login.service';
 import { CookieService } from 'ngx-cookie-service';
 import * as jwt_decode from 'jwt-decode';
 
-import { TokenDecoded } from '../../clases/Token';
+import { TokenDecoded } from 'src/app/clases/Token';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
@@ -33,10 +33,7 @@ export class LoginComponent implements OnInit {
      if(this.cookies.get("etiquetaT-cookie")){
       this.router.navigate(["/home"]);
     }
-    
-
-    
-   //  window.setTimeout;
+  
    }else{
     console.log("Usuario no logueado");
    }

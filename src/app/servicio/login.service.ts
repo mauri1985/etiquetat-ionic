@@ -7,9 +7,9 @@ import { CookieService } from 'ngx-cookie-service';
 export class LoginService {
 
   constructor(private http: HttpClient, private cookies: CookieService) { }
-
-
-
+ 
+ 
+ 
   public isTokenExpired(): boolean {
     let res: boolean = true;
     let token = this.cookies.get("etiquetaT-cookie");
@@ -30,9 +30,9 @@ export class LoginService {
   }
 
   public getToken() {
-    let prueba = JSON.parse(this.cookies.get("etiquetaT-cookie"));
-    //console.log(prueba);
-    return prueba;
+let prueba= JSON.parse(this.cookies.get("etiquetaT-cookie"));
+//console.log(prueba);
+   return prueba;
 
   }
 

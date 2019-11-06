@@ -1,12 +1,12 @@
 
-import { Objeto } from '../../clases/Objeto';
-import { Categoria } from '../../clases/Categoria';
-import { ImagenService } from '../../servicio/imagen.service';
-import { EtiquetaService } from '../../servicio/etiqueta.service';
-import { Etiqueta } from '../../clases/Etiqueta';
+import { Objeto } from './../../clases/Objeto';
+import { Categoria } from './../../clases/Categoria';
+import { ImagenService } from './../../servicio/imagen.service';
+import { EtiquetaService } from './../../servicio/etiqueta.service';
+import { Etiqueta } from './../../clases/Etiqueta';
+import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 
-
-import { CategoriaService } from '../../servicio/categoria.service';
+import { CategoriaService } from './../../servicio/categoria.service';
 import { Component, EventEmitter, Input, Output, Inject } from '@angular/core';
 
 import { CdkDragDrop, CdkDragEnter, CdkDragEnd, CdkDragMove, CdkDragStart } from '@angular/cdk/drag-drop';
@@ -22,8 +22,11 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import html2canvas from 'html2canvas';
 import { delay } from 'q';
 import { async } from '@angular/core/testing/testing';
-import { AltaParametroService } from '../../servicio/alta-parametro.service';
+import { AltaParametroService } from './../../servicio/alta-parametro.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Usuario } from 'src/app/clases/Usuario';
+import { LoginService } from 'src/app/servicio/login.service';
+import { CookieService } from 'ngx-cookie-service';
 declare var takeSS: any;
 export interface DialogData {
   animal: string;
@@ -38,8 +41,10 @@ export class EtiquetaComponent {
   @Input() heading: string;
   @Input() color: string = '#000105';
   @Output() event: EventEmitter<string> = new EventEmitter<string>();
-
+  public showAlert: boolean = false;
   public show = false;
+ public id_para_carrito;
+ objetosArray = new Array<Etiqueta>();
   public defaultColors: string[] = [
     '#000105',
     '#ffffff',
@@ -67,28 +72,41 @@ export class EtiquetaComponent {
     '#c97545',
     '#c1800b'
   ];
-  constructor(private parametroservice: AltaParametroService ,private service: CategoriaService, private serviceetiqueta: EtiquetaService, private ImagenService: ImagenService, public dialog: MatDialog) { }
+  constructor(private loginService: LoginService, private cookieService: CookieService, private parametroservice: AltaParametroService, private service: CategoriaService, private serviceetiqueta: EtiquetaService, private ImagenService: ImagenService, public dialog: MatDialog) { }
+
+  etiquetaModel= new Etiqueta;
   mytext: String;
   listaImagenes: any;
-  listatamanioEtiqueta :  any;
+  listatamanioEtiqueta: any;
+  listaCantidad: any;
+  listaTipoPapel: any;
+  total: number = 0;
+  selecionadosoporte: any;
+  usuarioModel = new Usuario;
+  resp: any;
   imagen: Imagen = new Imagen();
-  mailusuariologin: string = 'lauromuller@gmail.com';
+  mailusuariologin: string;
   public uploader: FileUploader;
   etiqueta: Etiqueta;
   objeto: Objeto;
   img: Imagen;
   urlimagen: String;
   mensaje: String;
+  
   @Input() largo: number = 25;
   @Input() ancho: number = 150;
   tipofuente: string = 'serif';
   Categoriaselected: number = 50;
+  soporteselecionado: any;
+  cantidadselecionada: any;
+  tipopapelseleccionado: any;
   checked = true;
   checkedLienzo = true;
   mostrar = true;
   listaetiqueta: Etiqueta;
   listacategoria: Categoria;
   listaimagenes: any;
+  atrib_etiqueta: Object;
   listaimagenesObjetos: any;
   events: string[] = [];
   opened: boolean;
@@ -559,7 +577,7 @@ export class EtiquetaComponent {
 
   }
   public captureScreen() {
-    window.scroll(0,0);
+    window.scroll(0, 0);
     let data = document.getElementById('contentToConvert');
     html2canvas(data, {
       logging: true,
@@ -597,18 +615,25 @@ export class EtiquetaComponent {
 
   }
   ngOnInit() {
-    let alphas:string[];
-    let strin:string;
-  //  eti: string[] = new array();
+   this.id_para_carrito = new Number();
+    this.resp = this.cookieService.get("etiquetaT-cookie");
+    let tokenJSON = JSON.parse(this.resp);
+    this.mailusuariologin=tokenJSON.email;
+    let alphas: string[];
+    let strin: string;
+    //  eti: string[] = new array();
     //pepe: String[] = new array();
     this.service.listarCategoria().subscribe((data: Categoria) => this.listacategoria = data);
-    this.parametroservice.listarParametro('TamanioEtiqueta').subscribe((data:string) =>{ this.listatamanioEtiqueta = data; strin = data; });
-    this.parametroservice.listarParametro('TamanioEtiqueta').subscribe(
+    this.parametroservice.listarParametro('TamanioEtiqueta').subscribe((data) => { this.listatamanioEtiqueta = data });
+    this.parametroservice.listarParametro('Cantidad').subscribe((data) => { this.listaCantidad = data });
+    this.parametroservice.listarParametro('TipoPapel').subscribe((data) => { this.listaTipoPapel = data });
+
+    /*this.parametroservice.listarParametro('TamanioEtiqueta').subscribe(
     data => {
 
-     /* console.log("User Login: " + data);
+      console.log("User Login: " + data);
       console.log("Bio: " + data);
-      console.log("Company: " + data);*/
+      console.log("Company: " + data);
     },
     (err: HttpErrorResponse) => {
       if (err.error instanceof Error) {
@@ -617,22 +642,8 @@ export class EtiquetaComponent {
         console.log("Server-side error");
       }
     }
-);
-let arrayDeCadenas = strin.split(",");
-//alphas = strin.split(',');
-console.log(arrayDeCadenas[0]);
+);*/
 
-
-
-
-
-   // console.log(this.listatamanioEtiqueta[1]);
-
-   for (let key in this.listatamanioEtiqueta) {
-    //  keys.push({key: key, value: value[key]});
-        console.log(key);
-        console.log('pepe');
-    }
     /*for (let i = 0; i <this.listatamanioEtiqueta.length; i++) {
       console.log(this.listatamanioEtiqueta[i]);
 
@@ -666,6 +677,7 @@ console.log(arrayDeCadenas[0]);
         this.mensaje = 'Error al  subir Imagen ';
         return false;
       }
+      if (fileItem.status == 200) {
       console.log(fileItem);
       console.log(fileItem.data.url);
       this.urlimagen = fileItem.data.url;
@@ -674,18 +686,19 @@ console.log(arrayDeCadenas[0]);
       this.imagen.publica = false;//this.checkedLienzo ;
       this.imagen.tipo = this.tipoimagen;
       this.imagen.estado = true;
-      this.imagen.email = this.mailusuariologin;
+      this.imagen.email = tokenJSON.email;
 
       this.imagen.id_categoria = this.Categoriaselected;
 
 
       this.ImagenService.altaImagen(this.imagen).subscribe(response => { });
-        console.log(JSON.stringify(this.imagen));
+      console.log(JSON.stringify(this.imagen));
 
       this.mensaje = 'Imagen subida correctamente';
       this.delay(1000).then(any => {
-         this.refrescarlienzosImagenes(); this.mensaje = '';
+        this.refrescarlienzosImagenes(); this.mensaje = '';
       });
+    }
     }
 
     this.uploader = new FileUploader(uploaderOptions);
@@ -741,7 +754,7 @@ console.log(arrayDeCadenas[0]);
   }
 
   guardar() {
-    window.scroll(0,0);
+    window.scroll(0, 0);
     this.verr();
     const imagen = 'IMAGEN';
     const texto = 'TEXTO';
@@ -809,7 +822,7 @@ console.log(arrayDeCadenas[0]);
     this.etiqueta.foto_previsualizacion = "http://res.cloudinary.com/cdnimages-hechosdraps/image/upload/v1571829699/imgdraps/graduacion.png";
     this.etiqueta.id_categoria = this.Categoriaselected;
     this.etiqueta.email = this.mailusuariologin;
-  //  this.etiqueta.
+    //  this.etiqueta.
     // this.objeto.id = 22;
 
     // this.objeto.etiqueta: Etiqueta;
@@ -823,9 +836,66 @@ console.log(arrayDeCadenas[0]);
 
     console.log(JSON.stringify(this.etiqueta));
     this.delay(13000).then(any => {
-      this.serviceetiqueta.altatiqueta(this.etiqueta).subscribe(response => { });
-      this.mensaje = 'Plantilla guardada exitosamente';
+      this.serviceetiqueta.altatiqueta(this.etiqueta).subscribe((response:Number) => {
+    console.log(response);
+      if(response!=null){
+        this.show = true;
+      }
+      this.id_para_carrito=response;
+   console.log(this.id_para_carrito);
+     
+    }); 
+      
     })
     //  etiqueta: Imagen = new Imagen();
+  }
+  CalcularPrecio() {
+    console.log(this.cantidadselecionada.clave);
+    console.log(this.tipopapelseleccionado.clave);
+    console.log(this.selecionadosoporte.clave);
+    let cantidad: number = parseFloat(this.cantidadselecionada.valor);
+    let tipopapel: number = parseFloat(this.tipopapelseleccionado.valor);
+    let soporteselec: number = parseFloat(this.selecionadosoporte.valor);
+
+    this.total = (cantidad * soporteselec) * tipopapel;
+    console.log(this.total);
+
+  }
+
+  agregarCarrito(){
+    console.log(this.id_para_carrito);
+    this.serviceetiqueta.getEtiqueta(this.id_para_carrito).subscribe((response:any) => {
+    
+        console.log(response);
+       let etiqueta_carrito:Etiqueta= response;
+       if(localStorage.getItem('objetos') === null){
+      this.etiquetaModel.id= etiqueta_carrito.id;
+      this.etiquetaModel.foto_previsualizacion=etiqueta_carrito.foto_previsualizacion;
+      this.etiquetaModel.email=this.mailusuariologin;
+      this.etiquetaModel.monto=this.total;
+      this.etiquetaModel.cantidad=parseFloat(this.cantidadselecionada);
+      this.etiquetaModel.tipo_Papel=this.tipopapelseleccionado;
+      this.etiquetaModel.tamanio_Etiqueta=this.soporteselecionado;
+      this.objetosArray.push(this.etiquetaModel);
+    
+       localStorage.setItem("objetos",JSON.stringify(this.objetosArray));
+       }else{
+         
+         this.objetosArray= JSON.parse(localStorage.getItem('objetos'));
+        
+         this.etiquetaModel.id= etiqueta_carrito.id;
+         this.etiquetaModel.foto_previsualizacion=etiqueta_carrito.foto_previsualizacion;
+         this.etiquetaModel.email=this.mailusuariologin;
+         this.etiquetaModel.monto=this.total;
+         this.etiquetaModel.cantidad=parseFloat(this.cantidadselecionada);
+         this.etiquetaModel.tipo_Papel=this.tipopapelseleccionado;
+         this.etiquetaModel.tamanio_Etiqueta=this.soporteselecionado;
+         this.objetosArray.push(this.etiquetaModel);
+         localStorage.setItem("objetos",JSON.stringify(this.objetosArray));
+       }
+      
+          });
+          window.location.reload();
+     
   }
 }

@@ -13,5 +13,7 @@ export class Usuario{
     numero:String;
     extra:String;
     contrasenia:String;
+   nuevaContrasenia:String;
+   
     rol:string;
 }

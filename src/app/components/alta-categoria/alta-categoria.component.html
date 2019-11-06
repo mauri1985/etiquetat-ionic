@@ -1,0 +1,17 @@
+<form (ngSubmit)="agregarCategoria()" [formGroup]="categoriaForm">
+    <div class="form-group col-md-6">
+        <label>Nombre</label>
+        <input [(ngModel)]="categoriaModel.nombre" formControlName="nombre" name="nombre" type="text"
+            class="form-control">
+        <span *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="help-block">
+            <span class="help-block" *ngIf="nombre.errors.required">
+                Debe ingresar una nombre para la Categoria
+            </span>
+        </span>
+    </div>
+    <div>
+    <button type="submit" class="btn btn-success">Confirmar</button>
+    <button routerLink='/home' type="button" class="btn btn-danger">Cancelar</button>
+    </div>
+    
+</form>

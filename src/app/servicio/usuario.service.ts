@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient} from '@angular/common/http';
 import { Usuario } from '../clases/Usuario';
-//import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class UsuarioService {
       })
     }
 
-    const url = 'http://192.168.1.43:8080/proyecto-web/rest/registroUsuario';
+    const url = 'http://localhost:8080/proyecto-web/rest/registroUsuario';
     console.log(usuario);
     
     
@@ -34,10 +34,27 @@ export class UsuarioService {
       })
     }
 
-    const url = 'http://192.168.1.43:8080/proyecto-web/rest/altaUsuario';
+    const url = 'http://localhost:8080/proyecto-web/rest/altaUsuario';
     console.log(usuario);
     
     
     return this.http.post(url,usuario,httpOptions);
   }
+
+  public cambiarContrasenia(email,contrasenia,nuevaContrasenia){
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    }
+
+    const url = 'http://localhost:8080/proyecto-web/rest/cambiarContrasenia';
+    
+    
+    
+    return this.http.post(url,{email,contrasenia,nuevaContrasenia},httpOptions);
+  }
+
+
 }

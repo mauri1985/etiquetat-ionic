@@ -11,8 +11,7 @@ form {
     margin-top: 15px;
 }
 
-button{
-    margin: 0 auto;
-    text-align: center;
-    margin-top: 15px;
+span {
+ color: red;
+ font-style: italic;
 }

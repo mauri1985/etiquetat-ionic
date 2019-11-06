@@ -1,0 +1,61 @@
+<form (ngSubmit)="altaUsuario()" [formGroup]="registerAdminForm">
+
+  <div class="form-group col-md-6">
+    <label>Nombre</label>
+    <input [(ngModel)]="usuarioModel.nombre" formControlName="nombreUser" name="nombre" class="form-control">
+    <span class="help-block" *ngIf="nombreUser.invalid && (nombreUser.dirty || nombreUser.touched)">
+      <span class="help-block" *ngIf="nombreUser.errors.required">
+          Debe ingresar un nombre
+      </span>
+    </span>
+  </div>
+  <div class="form-group col-md-6">
+    <label>Apellido</label>
+    <input [(ngModel)]="usuarioModel.apellido" formControlName="apellidoUser" name="apellido"  class="form-control">
+    <span class="help-block" *ngIf="apellidoUser.invalid && (apellidoUser.dirty || apellidoUser.touched)">
+      <span class="help-block" *ngIf="apellidoUser.errors.required">
+          Debe ingresar un apellido
+      </span>
+    </span>    
+  </div>
+  <div class="form-group col-md-6">
+    <label for="exampleFormControlSelect1">Rol</label>
+    <select [(ngModel)]="usuarioModel.rol" class="form-control" formControlName="rol" name="rol" id="exampleFormControlSelect1">
+      <option>SUPERVISOR</option>
+      <option>OPERADOR</option>
+
+    </select>
+  </div>
+  <div class="form-group col-md-6">
+    <label>Correo electrónico</label>
+    <input [(ngModel)]="usuarioModel.email" formControlName="emailUser" name="email" class="form-control">
+    <span class="help-block" *ngIf="emailUser.invalid && (emailUser.dirty || emailUser.touched)">
+      <span class="help-block" *ngIf="emailUser.errors.required">
+          Debe ingresar un email
+      </span>
+      <span class="help-block" *ngIf="emailUser.errors.email">
+          El email debe tener este formato ejemplo@email.com
+      </span>
+    </span>
+  </div>
+  
+  <div class="form-group col-md-6">
+    <label>Contraseña</label>
+    <input [(ngModel)]="usuarioModel.contrasenia" formControlName="contraseniaUser" type="password" name="contrasenia" class="form-control">
+    <span class="help-block" *ngIf="contraseniaUser.invalid && (contraseniaUser.dirty || contraseniaUser.touched)">
+      <span class="help-block" *ngIf="contraseniaUser.errors.required">
+          Debe ingresar un password 
+      </span>
+    </span>  
+  </div>
+  <div>
+    <button type="submit" class="btn btn-success">Confirmar</button>
+    <button href="/" type="button" class="btn btn-danger">Cancelar</button>
+    </div>
+    <div *ngIf="showAlertTrue" class="alert alert-success" role="alert">
+      Usuario creado exitosamente!!
+    </div>
+    <div *ngIf="showAlertFalse" class="alert alert-danger" role="alert">
+      El usuario no se pudo crear, intente nuevamente.
+    </div>
+</form>

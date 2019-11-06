@@ -2,12 +2,9 @@
   <i>{{mensaje}}</i>
 </li>
 
-
-
-
 {{mytext}}
-<input type="hidden" id="texto">
-<div id="pepe2" class="w3-container">
+<input type="hidden" id="texto" >
+<div id ="pepe2"class="w3-container">
 
   <div class="row">
     <div class="col-4" style="padding: 5px">
@@ -37,7 +34,7 @@
               </mat-form-field>
               <div class="row">
 
-                <mat-slide-toggle [(ngModel)]="checked" [checked]="checked" (change)="cambioswitch()"> Publicas
+                <mat-slide-toggle [(ngModel)]="checked" [checked]="checked" (change)="cambioswitch()"> Habilitadas
                 </mat-slide-toggle>
               </div>
               <div class="row">
@@ -58,7 +55,7 @@
 
             </mat-panel-title>
             <mat-panel-description>
-              Cambiar Lienzo
+              Cambiar Linezo
             </mat-panel-description>
           </mat-expansion-panel-header>
           <mat-panel-description>
@@ -77,7 +74,7 @@
               <div class="row">
 
                 <mat-slide-toggle [(ngModel)]="checkedLienzo" [checked]="checkedLienzo" (change)="cambioswitchLinezo()">
-                  Publicas
+                  Habilitadas
                 </mat-slide-toggle>
               </div>
               <div style="  text-align: left;" class="form-group">
@@ -129,7 +126,7 @@
               <div>
 
                 <mat-slide-toggle [(ngModel)]="checkedLienzo" [checked]="checkedLienzo" (change)="cambioswitchImagen()">
-                  Publicas
+                  Habilitadas
                 </mat-slide-toggle>
               </div>
               <div style="  text-align: left;" class="form-group">
@@ -250,76 +247,39 @@
           <mat-panel-description>
 
             <div style="  text-align: left;">
+              <mat-form-field>
+                <mat-label>Seleccione Categoria</mat-label>
+
+                <mat-select  [(value)]="Categoriaselected"   required (selectionChange)="refrescarPlantillas()">
+                  <mat-option *ngFor="let categoria of listacategoria" [value]="categoria.id">
+                    {{categoria.nombre}}
+                  </mat-option>
+
+                </mat-select>
+
+              </mat-form-field>
+              <div>
+
+                <!--  <mat-slide-toggle [(ngModel)]="EstadoGuardar" [checked]="EstadoGuardar"> Habilitada
+                </mat-slide-toggle> -->
+              </div>
 
 
-
-              <!--
+              <div>
+                <!--
                 <mat-form-field>
                   <input [(ngModel)]="NombrePlantilla" matInput placeholder="Nombre Plantilla">
                 </mat-form-field>-->
-
-   <div>
-                    <mat-form-field>
-                        <mat-label>Seleccione Soporte</mat-label>
-
-                        <mat-select  [(value)]="selecionadosoporte">
-                          <mat-option *ngFor="let tetiqueta of listatamanioEtiqueta" [value]="tetiqueta">
-                            {{tetiqueta.clave}}
-                          </mat-option>
-
-                        </mat-select>
-                      </mat-form-field>
-
-
-
-                </div>
                 <div>
-                    <mat-form-field>
-                        <mat-label>Seleccione Tipo de papel</mat-label>
-
-                        <mat-select [(value)]="tipopapelseleccionado">
-                          <mat-option *ngFor="let tipopapel of listaTipoPapel" [value]="tipopapel">
-                            {{tipopapel.clave}}
-                          </mat-option>
-
-                        </mat-select>
-                      </mat-form-field>
-
-
-
+                  <button (click)="guardar()" mat-raised-button color="primary"><i class="fa fa-save"></i></button>
                 </div>
 
-              </div>
-              <div>
-                <mat-form-field>
-                  <mat-label>Seleccione Cantidad</mat-label>
 
-                  <mat-select [(value)]="cantidadselecionada">
-                    <mat-option *ngFor="let cantidadsel of listaCantidad" [value]="cantidadsel.valor">
-                      {{cantidadsel.clave}}
-                    </mat-option>
-
-                  </mat-select>
-                </mat-form-field>
 
 
 
               </div>
-
-              <div><h2> U$S {{total}}</h2> </div>
-              <div>
-                <button (click)="CalcularPrecio()" mat-raised-button color="primary"><i class="fa fa-calculator"></i></button>
-                <button (click)="guardar()" mat-raised-button color="primary"><i class="fa fa-save"></i></button>
-                <button *ngIf="show" (click)="agregarCarrito()" mat-raised-button color="primary"><i class="fa fa-cart-plus"></i></button>
-              </div>
-
-
-
-
-             
-
-
-            
+            </div>
           </mat-panel-description>
 
 
@@ -329,6 +289,15 @@
 
 
       </mat-accordion>
+
+
+
+
+
+
+
+
+
 
       <!--  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner">
@@ -369,7 +338,7 @@
 
     </div>
 
-    <div id="pepe" class="col-8" style="padding: 5px">
+    <div id ="pepe" class="col-8" style="padding: 5px" >
 
 
 
@@ -382,19 +351,19 @@
 
 
 
-          S <i class="fa fa-minus-square"></i>
-          <mat-slider style="  padding: 0px;margin: 0px" class="example-margin" (change)=achicar() max="3" min="0"
-            step="0.01" thumbLabel="true" tickInterval="0.01" [(ngModel)]="value">
+         S <i class="fa fa-minus-square"></i>
+          <mat-slider style="  padding: 0px;margin: 0px" class="example-margin" (change)=achicar() max="3" min="0" step="0.01" thumbLabel="true"
+            tickInterval="0.01" [(ngModel)]="value">
           </mat-slider><i class="fa fa-plus-square"></i>
 
         </div>
-        <div class="col">
+        <div class="col" >
 
 
 
           O <i class="fa fa-minus-square"></i>
-          <mat-slider style="  padding: 0px;margin: 0px" class="example-margin" (change)=opacidad() max="1" min="0"
-            step="0.01" thumbLabel="true" tickInterval="0.01" [(ngModel)]="OpacidadValor">
+          <mat-slider style="  padding: 0px;margin: 0px" class="example-margin" (change)=opacidad() max="1" min="0" step="0.01" thumbLabel="true"
+            tickInterval="0.01" [(ngModel)]="OpacidadValor">
           </mat-slider><i class="fa fa-plus-square"></i>
 
         </div>
@@ -402,77 +371,74 @@
       <div class="row" style="  text-align: left">
 
 
-        <div class="col">
+        <div class="col"  >
 
 
 
-          W <i class="fa fa-minus-square"></i>
-          <mat-slider style="  padding: 0px;margin: 0px" class="example-margin" (change)=witch() max="400" min="10"
-            step="1" thumbLabel="true" tickInterval="0.01" [(ngModel)]="w">
+         W <i class="fa fa-minus-square"></i>
+          <mat-slider  style="  padding: 0px;margin: 0px" class="example-margin" (change)=witch() max="400" min="10" step="1" thumbLabel="true"
+            tickInterval="0.01" [(ngModel)]="w">
           </mat-slider><i class="fa fa-plus-square"></i>
 
         </div>
-        <div class="col">
+        <div class="col"  >
 
 
 
-          H <i class="fa fa-minus-square"></i>
-          <mat-slider style="  padding: 0px;margin: 0px" class="example-margin" (change)=hige() max="400" min="10"
-            step="1" thumbLabel="true" tickInterval="0.01" [(ngModel)]="h">
+          H   <i class="fa fa-minus-square"></i>
+          <mat-slider style="  padding: 0px;margin: 0px" class="example-margin" (change)=hige() max="400" min="10" step="1" thumbLabel="true"
+            tickInterval="0.01" [(ngModel)]="h">
           </mat-slider><i class="fa fa-plus-square"></i>
 
         </div>
 
-      </div>
+    </div>
 
 
-      <button (click)="eliminar()" mat-raised-button color="primary"><i class="fa fa-trash"></i></button>
-      <button (click)="Rderecha()" mat-raised-button color="primary"><i class="fa fa-rotate-left"></i></button>
-      <button (click)="Rizquierda()" mat-raised-button color="primary"><i class="fa fa-repeat"
-          aria-hidden="true"></i></button>
-      <button (click)="captureScreen()" mat-raised-button color="primary"><i class="fa fa-file-pdf-o"></i></button>
+    <button (click)="eliminar()" mat-raised-button color="primary"><i class="fa fa-trash"></i></button>
+    <button (click)="Rderecha()" mat-raised-button color="primary"><i class="fa fa-rotate-left"></i></button>
+    <button (click)="Rizquierda()" mat-raised-button color="primary"><i class="fa fa-repeat"
+        aria-hidden="true"></i></button>
+    <button (click)="captureScreen()" mat-raised-button color="primary"><i class="fa fa-file-pdf-o"></i></button>
 
 
 
-      <div id="contentToConvert" class="example-boundary" [ngStyle]="{'background-image': 'url(' + fondo + ')'}">
+    <div  id="contentToConvert" class="example-boundary" [ngStyle]="{'background-image': 'url(' + fondo + ')'}">
 
-        <div *ngFor="let list of lista;let indice=index">
-          <div *ngIf="list.imagen" class="example-box" cdkDragBoundary=".example-boundary" cdkDrag
-            (cdkDragMoved)=drop($event) (cdkDragEnded)=drop2($event,indice)
-            [cdkDragConstrainPosition]="constrainPosition" [cdkDragFreeDragPosition]="dragPosition"
-            (cdkDragStarted)=drop3($event,indice) (click)=selecionar(indice) [style.width.px]="list.w"
-            [style.height.px]="list.h"
-            [style.transform]="'translate3d('+list.x +'px,' + list.y + 'px,' + list.y + 'px)'">
+      <div *ngFor="let list of lista;let indice=index">
+        <div *ngIf="list.imagen" class="example-box" cdkDragBoundary=".example-boundary" cdkDrag
+          (cdkDragMoved)=drop($event) (cdkDragEnded)=drop2($event,indice) [cdkDragConstrainPosition]="constrainPosition"
+          [cdkDragFreeDragPosition]="dragPosition" (cdkDragStarted)=drop3($event,indice) (click)=selecionar(indice)
+          [style.width.px]="list.w" [style.height.px]="list.h"
+          [style.transform]="'translate3d('+list.x +'px,' + list.y + 'px,' + list.y + 'px)'">
 
-            <img id={{list.id}} src="{{list.imagen}}" alt="imagen" [style.width.px]="list.w" [style.height.px]="list.h"
-              [ngStyle]="{'opacity': ''+ list.opacidad + '','transform': 'rotate('+ list.r + 'deg) scale(' + list.s +')'}"
-              style="background-image: none;">
+          <img id={{list.id}} src="{{list.imagen}}" alt="imagen" [style.width.px]="list.w" [style.height.px]="list.h"
+            [ngStyle]="{'opacity': ''+ list.opacidad + '','transform': 'rotate('+ list.r + 'deg) scale(' + list.s +')'}"
+            style="background-image: none;">
 
-          </div>
+        </div>
 
-          <div *ngIf="list.texto" id="er" class="example-box" cdkDragBoundary=".example-boundary" cdkDrag
-            (cdkDragMoved)=drop($event) (cdkDragEnded)=drop2($event,indice)
-            [cdkDragConstrainPosition]="constrainPosition" [cdkDragFreeDragPosition]="dragPosition"
-            (cdkDragStarted)=drop3($event,indice) (click)=selecionar(indice)
-            [style.transform]="'translate3d('+list.x +'px,' + list.y + 'px,' + list.y + 'px)'">
-            <input [(ngModel)]="list.texto" name="name" type="text" value={{list.texto}} [style.width.px]="list.w"
-              [style.height.px]="list.h"
-              [ngStyle]="{'opacity': ''+ list.opacidad + '','color': '' + list.color + '','font-size': '25' ,'font-family': '' + list.fuente + '','transform': 'rotate('+ list.r + 'deg) scale(' + list.s +') '} "
-              style="background-color:transparent; border: 0;
+        <div *ngIf="list.texto" id="er" class="example-box" cdkDragBoundary=".example-boundary" cdkDrag
+          (cdkDragMoved)=drop($event) (cdkDragEnded)=drop2($event,indice) [cdkDragConstrainPosition]="constrainPosition"
+          [cdkDragFreeDragPosition]="dragPosition" (cdkDragStarted)=drop3($event,indice) (click)=selecionar(indice)
+          [style.transform]="'translate3d('+list.x +'px,' + list.y + 'px,' + list.y + 'px)'">
+          <input [(ngModel)]="list.texto"  name="name" type="text" value={{list.texto}} [style.width.px]="list.w" [style.height.px]="list.h"
+            [ngStyle]="{'opacity': ''+ list.opacidad + '','color': '' + list.color + '','font-size': '25' ,'font-family': '' + list.fuente + '','transform': 'rotate('+ list.r + 'deg) scale(' + list.s +') '} "
+            style="background-color:transparent; border: 0;
       background: none;
       box-shadow: none;
       border-radius: 0px;
       ">
 
-          </div>
-
-        </div>
-
       </div>
 
     </div>
-    
-          </div>
+</div>
 
-    
-         
+    </div>
+
+  </div>
+</div>
+
+
+

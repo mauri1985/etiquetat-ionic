@@ -33,5 +33,16 @@ export class EtiquetaService {
     return this.http.post(url, etiqueta, httpOptions);
   }
 
+  public getEtiqueta(id:Number){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    }
+
+    const url = 'http://localhost:8080/proyecto-web/rest/findEtiquetaId/'+ id;
+
+    return this.http.get(url, httpOptions);
+  }
 
 }
