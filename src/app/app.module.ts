@@ -51,10 +51,10 @@ import { AltaCategoriaComponent } from './components/alta-categoria/alta-categor
   declarations: [
     AppComponent,
     HeaderComponent,
-    PlantillaComponent,
     CarritoComponent,
     ImagenesComponent,
-    FileSelectDirective, LoginComponent,
+    FileSelectDirective, 
+    LoginComponent,
     AltausuarioComponent,
     ImagenesComponent,
     FileSelectDirective,
@@ -63,12 +63,10 @@ import { AltaCategoriaComponent } from './components/alta-categoria/alta-categor
     AltaUsuarioAdminComponent,
     CambioContraseniaComponent,
     ValidarContraDirective,
-
     EtiquetaComponent,
-
     AltaCategoriaComponent
-
   ],
+  entryComponents: [],
   imports: [
     NgxPayPalModule,
     FormsModule,
@@ -82,11 +80,18 @@ import { AltaCategoriaComponent } from './components/alta-categoria/alta-categor
     BrowserAnimationsModule,
     RouterModule,
     APP_ROUTING,
-
+    //Descomentar si no funciona file upload en etiqueta
+    // FileUploadModule, 
+    IonicModule.forRoot(), 
     CloudinaryModule.forRoot(Cloudinary, { cloud_name: 'cdnimages-hechosdraps' }),
 
   ],
-  providers: [CookieService],
+  providers: [
+    CookieService,
+    StatusBar,
+    SplashScreen,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
