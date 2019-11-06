@@ -16,7 +16,7 @@ const APP_ROUTES: Routes = [
   { path: 'plantilla', component: PlantillaComponent },
   { path: 'carrito', component: CarritoComponent },
   { path: 'registro', component: AltausuarioComponent },
-  { path: '', component:LoginComponent },
+  { path: '', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule) },
   { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule) },
   { path: 'altaAdmin', component:AltaUsuarioAdminComponent},
   { path: 'cambioContrasenia', component:CambioContraseniaComponent},
