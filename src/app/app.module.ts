@@ -38,7 +38,7 @@ import { FileSelectDirective } from 'ng2-file-upload';
 
 import * as jwt_decode from 'jwt-decode';
 
-import { HomeComponent } from './components/home/home.component';
+
 import { AltaUsuarioAdminComponent } from './components/alta-usuario-admin/alta-usuario-admin.component';
 import { CambioContraseniaComponent } from './components/cambio-contrasenia/cambio-contrasenia.component';
 
@@ -59,7 +59,7 @@ import { AltaCategoriaComponent } from './components/alta-categoria/alta-categor
     ImagenesComponent,
     FileSelectDirective,
     PlantillaComponent,
-    HomeComponent,
+
     AltaUsuarioAdminComponent,
     CambioContraseniaComponent,
     ValidarContraDirective,

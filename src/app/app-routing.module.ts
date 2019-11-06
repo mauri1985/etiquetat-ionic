@@ -4,7 +4,6 @@ import { CarritoComponent } from './components/carrito/carrito.component';
 import { LoginComponent } from './components/login/login.component';
 import { AltausuarioComponent } from './components/altausuario/altausuario.component';
 import { HeaderComponent } from './components/header/header.component';
-import { HomeComponent } from './components/home/home.component';
 import { AltaUsuarioAdminComponent } from './components/alta-usuario-admin/alta-usuario-admin.component';
 import { CambioContraseniaComponent } from './components/cambio-contrasenia/cambio-contrasenia.component';
 import { ImagenesComponent } from './components/imagenes/imagenes.component';
@@ -18,11 +17,12 @@ const APP_ROUTES: Routes = [
   { path: 'carrito', component: CarritoComponent },
   { path: 'registro', component: AltausuarioComponent },
   { path: '', component:LoginComponent },
-  { path: 'home', component:HomeComponent},
+  { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule) },
   { path: 'altaAdmin', component:AltaUsuarioAdminComponent},
   { path: 'cambioContrasenia', component:CambioContraseniaComponent},
   { path: 'app-imagenes', component: ImagenesComponent },
   { path: 'etiqueta', component: EtiquetaComponent },
+  { path: 'login', component: LoginComponent },
 ];
 
 export const APP_ROUTING = RouterModule.forRoot(APP_ROUTES);
